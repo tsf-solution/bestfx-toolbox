@@ -12,16 +12,16 @@ opts = processInputs(varargin{:});
 
 % global search
 if opts.depth == 0
-    bhdls = find_system(opts.shdl, 'RegExp', opts.regexp, opts.attr, attr);
+    bhdls = find_system(opts.systemhandle, 'RegExp', opts.regexp, opts.attr, attr);
 else
-    bhdls = find_system(opts.shdl, 'LookUnderMasks', 'all', 'SearchDepth', opts.depth, 'RegExp', opts.regexp, opts.attr, attr);
+    bhdls = find_system(opts.systemhandle, 'LookUnderMasks', 'all', 'SearchDepth', opts.depth, 'RegExp', opts.regexp, opts.attr, attr);
 end
 
 %% EVALUATION INPUT ARGUMENTS
 function options = processInputs(varargin) % nested function
     IP = inputParser;
     IP.KeepUnmatched = false;
-    IP.addParameter('shdl','',@(x)ishandle(x));
+    IP.addParameter('systemhandle','',@(x)ishandle(x));
     IP.addParameter('depth',0,@(x)me.types.bool.validate(x));
     IP.addParameter('regexp','off',@(x)ischar(x));
     IP.addParameter('attr','BlockType',@(x)ischar(x));
@@ -30,11 +30,11 @@ function options = processInputs(varargin) % nested function
     
     options.regexp = validatestring(options.regexp,{'on','off'});
     options.attr = validatestring(options.attr,{'Type','BlockType','ReferenceBlock'}); 
-    if isempty(options.shdl)
+    if isempty(options.systemhandle)
         if options.depth
-            options.shdl = get_param(gcs,'Handle');
+            options.systemhandle = get_param(gcs,'Handle');
         else
-            options.shdl = get_param(bdroot,'Handle');
+            options.systemhandle = get_param(bdroot,'Handle');
         end
     end
 end

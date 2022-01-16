@@ -23,7 +23,7 @@ function setafs(bhdl)
 
     % identify parent system
     shdl = toHandle(get(bhdl,'Parent'));
-    ehdl = findblocks('^(EnablePort|TriggerPort|ActionPort)$','shdl',shdl,'regexp','on','depth',1);
+    ehdl = findblocks('^(EnablePort|TriggerPort|ActionPort)$','systemhandle',shdl,'regexp','on','depth',1);
     
     afstr = '';
     

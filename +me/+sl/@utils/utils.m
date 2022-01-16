@@ -24,6 +24,14 @@ classdef utils
             end
         end
         
+        function str = geteval(bhdl,key)
+            str = get(bhdl,key);
+            try
+                str = mat2str(evalin('base',str));
+            catch
+                % do nothing
+            end
+        end
         
         function autoname(bhdl,re)
             if nargin < 2
