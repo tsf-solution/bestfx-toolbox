@@ -10,26 +10,39 @@ bhdls = findblocks('Outport','depth',depth);
 % Set foreground color
 set( bhdls, 'ForegroundColor', 'blue');
 set( bhdls, 'BackgroundColor', 'white');
-set( bhdls, 'AttributesFormatString', '');
 
-% % Set attributes format string
-% for i=1 : length(bhdls)
-%     
-%     bhdl = bhdls(1);
-%     
-%     % check if parent is triggered or enabled subsystem
-%     shdl = toHandle(get(bhdl,'Parent'));
-%     if isequal(numel(findblocks('EnablePort|TriggerPort|ActionPort','shdl',shdl,'regexp','on')),1)
-%         
-%         if isequal(regexp(get_param(bhdl,'OutputWhenDisabled'),'reset'),1)
-%             % display reset attributes
-%             set_param( bhdl, 'AttributesFormatString', 'OutputWhenDisabled: %<OutputWhenDisabled> \n InitialOutput: %<InitialOutput>');
-%         else
-%             % display hold attributes
-%             set_param( bhdl, 'AttributesFormatString', 'OutputWhenDisabled: %<OutputWhenDisabled>');
-%         end
-%     end
-% end
-
+% attribute format string
+arrayfun(@(x)setafs(x),bhdls);
 end
 
+function setafs(bhdl)
+
+    % import third parties
+    import me.sl.utils.toHandle
+    import me.sl.utils.findblocks
+
+    % identify parent system
+    shdl = toHandle(get(bhdl,'Parent'));
+    ehdl = findblocks('^(EnablePort|TriggerPort|ActionPort)$','shdl',shdl,'regexp','on','depth',1);
+    
+    afstr = '';
+    
+     % check parent system
+    if isequal(numel(ehdl),1)
+        % check outport
+        if filteroutputreset(bhdl)
+            % display reset attributes
+            afstr = sprintf('%sOutputWhenDisabled: %%<OutputWhenDisabled> \n InitialOutput: %%<InitialOutput>',afstr);
+        else
+            % display hold attributes
+            afstr = sprintf('%sOutputWhenDisabled: %%<OutputWhenDisabled>',afstr);
+        end
+    end
+    
+    set(bhdl,'AttributesFormatString',afstr);
+end
+
+function tf = filteroutputreset(bhdl)
+    % get attribute state
+    tf = isequal(regexp(get(bhdl,'OutputWhenDisabled'),'reset'),1);
+end

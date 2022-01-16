@@ -10,26 +10,77 @@ classdef utils
             end
         end
         
+        function str = toSystem(shdl)
+            if ishandle(shdl)
+                bpath = get(shdl,'Path');
+                bname = get(shdl,'Name');
+                if strcmpi(get(shdl,'Type'),'block_diagram')
+                    str = [bpath];
+                else
+                    str = [bpath '/' bname];
+                end
+            else
+                str = shdl;
+            end
+        end
+        
+        
         function autoname(bhdl,re)
             if nargin < 2
-                re = get( bhdl, 'BlockType');
+                re = sprintf('^%s',get(bhdl,'BlockType'));
             end
             if not(isequal(regexp(get(bhdl,'Name'),re),1))
-                set( bhdl, 'ShowName', 'on');
+                set(bhdl,'ShowName','on');
             end
+        end
+        
+        function tf = filtermasktype(bhdl,re)
+            tf = isequal(regexp(get(bhdl,'MaskType'),re), 1);
         end
         
         function tf = filterblocktype(bhdl,re)
             tf = isequal(regexp(get(bhdl,'BlockType'),re), 1);
         end
         
+        function tf = filtersampletime(bhdl)
+            % check if attribute exists
+            if ~isfield(set(bhdl),'SampleTime')
+                % default case is inherit sample time
+                tf = true;return;
+            end
+            % get attribute state
+            tf = isequal(regexp(get(bhdl, 'SampleTime'),'^(-1)$'),1);
+        end
+        
+        function tf = filterinitialcondition(bhdl)
+            tf = isequal(regexp(get(bhdl, 'InitialCondition'),'^(0|0\.0)$'),1);
+        end
+        
+        function tf = filteroutdatatypestr(bhdl)
+            tf = isequal(regexp(get(bhdl, 'OutDataTypeStr'),'^(Inherit: auto)$'),1);
+        end
+        
+        function tf = filterportdimensions(bhdl)
+            tf = isequal(regexp(get_param(bhdl,'PortDimensions'),'-1'),1);
+        end
+        
         function tf = filteriop(bhdl)
-            % get math blocks which have attribute 'SaturateOnIntegerOverflow'
+            % check if attribute exists
             if ~isfield(set(bhdl),'SaturateOnIntegerOverflow')
+                % default case is iop disabled
                 tf = false;return;
             end
-            % get all blocks which have 'SaturateOnIntegerOverflow' enabled
+            % get attribute state
             tf = isequal(get(bhdl,'SaturateOnIntegerOverflow'),'on');
+        end
+        
+        [tf] = isLibrary(bdhdl)
+        
+        function TF = isLoaded(bd)
+            if nargin==0
+                bd = bdroot;
+            end
+            TF = ismember(bd,find_system('type','block_diagram'));
         end
     end
 end

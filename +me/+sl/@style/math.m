@@ -7,7 +7,7 @@ import me.sl.utils.filterblocktype
 import me.sl.utils.filteriop
 
 % find blocks
-bhdls = findblocks('Abs|Add|Sum|Divide|Gain|Bias|Math|MinMax|Min|Max|Product|Trigonometry|sin|cos|tan|atan|Sign|Sqrt|Subtract|Sum|Width','depth',depth,'regexp','on');
+bhdls = findblocks('^(Abs|Add|Sum|Divide|Gain|Bias|Math|MinMax|Min|Max|Product|Trigonometry|sin|cos|tan|atan|Sign|Sqrt|Subtract|Sum|Width)$','depth',depth,'regexp','on');
 
 % Set foreground color
 set( bhdls, 'ForegroundColor', 'black');
@@ -16,13 +16,13 @@ set( bhdls, 'ShowName', 'off');
 set( bhdls, 'AttributesFormatString', '');
 
 % auto name: show name on/off
-TF = arrayfun(@(x)filterblocktype(x,'Gain'),bhdls);
-arrayfun(@(x)autoname(x,'Gain'),bhdls(TF));
-TF = arrayfun(@(x)filterblocktype(x,'Bias'),bhdls);
-arrayfun(@(x)autoname(x,'Bias'),bhdls(TF));
+TF = arrayfun(@(x)filterblocktype(x,'^Gain$'),bhdls);
+arrayfun(@(x)autoname(x),bhdls(TF));
+TF = arrayfun(@(x)filterblocktype(x,'^Bias$'),bhdls);
+arrayfun(@(x)autoname(x),bhdls(TF));
 
-% iop on? (SaturateOnIntegerOverflow)
-TF = arrayfun(@(c)filteriop(c),bhdls);
+% attribute format string
+TF = arrayfun(@(c)filteriop(c),bhdls); % SaturateOnIntegerOverflow
 arrayfun(@(x) set(x,'AttributesFormatString','IOP: on'), bhdls(TF));
 
 end

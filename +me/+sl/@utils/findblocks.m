@@ -10,10 +10,11 @@ opts = processInputs(varargin{:});
 
 %% EXECUTE
 
-if opts.depth
-    bhdls = find_system(opts.shdl, 'LookUnderMasks', 'all', 'SearchDepth', opts.depth, 'RegExp', opts.regexp, opts.attr, attr);
+% global search
+if opts.depth == 0
+    bhdls = find_system(opts.shdl, 'RegExp', opts.regexp, opts.attr, attr);
 else
-    bhdls = find_system(opts.shdl, opts.attr, attr);
+    bhdls = find_system(opts.shdl, 'LookUnderMasks', 'all', 'SearchDepth', opts.depth, 'RegExp', opts.regexp, opts.attr, attr);
 end
 
 %% EVALUATION INPUT ARGUMENTS
