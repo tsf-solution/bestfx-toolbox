@@ -1,4 +1,4 @@
-function tf = isLibrary(bdhdl)
+function [tf] = isLibrary(bdhdl)
     if nargin<1
         bdhdl = bdroot;
     end

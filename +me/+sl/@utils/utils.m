@@ -75,13 +75,7 @@ classdef utils
         end
         
         [tf] = isLibrary(bdhdl)
-        
-        function TF = isLoaded(bd)
-            if nargin==0
-                bd = bdroot;
-            end
-            TF = ismember(bd,find_system('type','block_diagram'));
-        end
+        [tf] = isLoaded(bdhdl)
     end
 end
 
