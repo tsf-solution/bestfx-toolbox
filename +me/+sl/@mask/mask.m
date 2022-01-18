@@ -3,6 +3,7 @@ classdef mask
         % prototypes
         switchinteractive(varargin)
         flipflop(varargin)
+        countertimerunit(varargin)
     end
 end
 

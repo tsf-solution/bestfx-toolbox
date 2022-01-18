@@ -1,4 +1,4 @@
-function [bhdl] = flipOutportTerminator(prop,blockname,varargin)
+function [bhdl] = flipInportConstant(prop,blockname,value,varargin)
 
 % import third parties
 import me.sl.creator.mods.flip
@@ -18,13 +18,18 @@ catch ME
 end
 
 % flip outport terminator
-[bhdl,btyp] = flip('blockhandle',opts.blockhandle,'maskparameter',propval,'blockname',blockname,'onblocktype','Outport','offblocktype','Terminator');
+[bhdl,btyp] = flip('blockhandle',opts.blockhandle,'maskparameter',propval,'blockname',blockname,'onblocktype','Inport','offblocktype','Constant');
 
-% outport settings
-if isequal(btyp, 'Outport')
-    set(bhdl, 'ForegroundColor','blue');
+% constant settings
+if isequal(btyp, 'Constant')
+    set(bhdl,'Value',value);
+    set(bhdl,'OutDataTypeStr',opts.outdatatypestr);
+    set(bhdl,'BackgroundColor','orange');
+% inport settings
+elseif isequal(btyp, 'Inport')
+    set(bhdl, 'ForegroundColor','green');
     if isnumeric(opts.portposition)
-        n = numel(ports('blockhandle',opts.blockhandle,'type','Outport'));
+        n = numel(ports('blockhandle',opts.blockhandle,'type','Inport'));
         opts.portposition = min(n,opts.portposition);
         set(bhdl, 'Port',num2str(opts.portposition));
     end
@@ -36,6 +41,7 @@ function options = processInputs(varargin) % nested function
     IP = inputParser;
     IP.addParameter('blockhandle',gcbh,@(x)ishandle(x));
     IP.addParameter('portposition','end',@(x)me.types.integer.validatePositive(x));
+    IP.addParameter('outdatatypestr','Inherit: Inherit from ''Constant value''',@(x)ischar(x));
     IP.parse(varargin{:});
     options = IP.Results;
 end

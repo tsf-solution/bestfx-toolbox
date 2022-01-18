@@ -28,8 +28,6 @@ switch(opts.clbk)
 end
 
 
-
-
 %% EVALUATION INPUT ARGUMENTS
 function options = processInputs(varargin) % nested function
     IP = inputParser;
