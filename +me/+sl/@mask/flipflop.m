@@ -4,7 +4,6 @@ function flipflop(varargin)
 
 % import third parties
 import me.sl.utils.geteval
-import me.types.bool.validateString
 import me.sl.creator.mods.flipOutportTerminator
 
 % Gather options from user inputs
@@ -18,7 +17,7 @@ ic = geteval(opts.blockhandle,'initial_condition');
 switch(opts.clbk)
     case 'init'
         % validate value
-        validateString(ic);
+        me.types.bool.validate(me.types.bool.toValue(ic));
         % attribute format string
         setafs();
         % hide/show ports

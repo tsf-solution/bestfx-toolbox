@@ -17,16 +17,19 @@ bvar = geteval(opts.blockhandle,'VariantType');
 uppr = geteval(opts.blockhandle,'UpperLimit');
 incr = geteval(opts.blockhandle,'Increment');
 decr = geteval(opts.blockhandle,'Decrement');
-init = geteval(opts.blockhandle,'InitialValue');
+cdtn = geteval(opts.blockhandle,'InitialCondition');
 usrc = geteval(opts.blockhandle,'UpperLimitSourcePort');
-isrc  = geteval(opts.blockhandle,'IncrementSourcePort');
-dsrc  = geteval(opts.blockhandle,'DecrementSourcePort');
-isrc  = geteval(opts.blockhandle,'InitialValueSourcePort');
+isrc = geteval(opts.blockhandle,'IncrementSourcePort');
+dsrc = geteval(opts.blockhandle,'DecrementSourcePort');
+csrc = geteval(opts.blockhandle,'InitialConditionSourcePort');
 
 switch(opts.clbk)
     case 'init'
         % validate value
-%         validateString(ic);
+        me.types.numeric.validatePositive(me.types.numeric.toValue(uppr));
+        me.types.numeric.validatePositive(me.types.numeric.toValue(incr));
+        me.types.numeric.validateNonNegative(me.types.numeric.toValue(decr));
+        me.types.numeric.validate(me.types.numeric.toValue(cdtn));
         % attribute format string
         setafs();
         % hide/show ports
@@ -38,7 +41,7 @@ switch(opts.clbk)
             'blockhandle',opts.blockhandle,'portposition',3,'outdatatypestr','IncrementDataType');
         flipInportConstant('DecrementSourcePort','decr','Decrement',...
             'blockhandle',opts.blockhandle,'portposition',4,'outdatatypestr','DecrementDataType');
-        flipInportConstant('InitialValueSourcePort','x0','InitialValue',...
+        flipInportConstant('InitialConditionSourcePort','x0','InitialCondition',...
             'blockhandle',opts.blockhandle,'portposition',5,'outdatatypestr','InitialValueDataType');
         flipInportConstant('ResetSourcePort','rs','false',...
             'blockhandle',opts.blockhandle,'portposition',6);
@@ -46,10 +49,6 @@ switch(opts.clbk)
             'blockhandle',opts.blockhandle,'portposition',2);
         flipOutportTerminator('CounterTimerStateSinkPort','st',...
             'blockhandle',opts.blockhandle,'portposition',1);
-        
-        
-        
-        
 end
 
 %% EVALUATION INPUT ARGUMENTS
@@ -67,13 +66,43 @@ end
 %% ATTRIBUTE FORMAT STRING
 function setafs() % nested function
     
-%     import me.types.bool.toValue
-%     import me.types.bool.toString
-%     
-%     afstr = '';
-%     if toValue(ic)
-%         afstr = sprintf('%sIC: %s\n',afstr,toString(ic));
-%     end
-%     set(opts.blockhandle,'AttributesFormatString',afstr);
+    import me.types.numeric.toValue
+    import me.string.compactfloat
+    
+    % trim decimal digits
+    uppr = compactfloat(toValue(uppr));
+    incr = compactfloat(toValue(incr));
+    decr = compactfloat(toValue(decr));
+    cdtn = compactfloat(toValue(cdtn));
+    
+    afstr = '';
+    % variant
+    if not(isequal(decr,'0'))
+        afstr = sprintf('%s%s\n',afstr,sprintf('Charging %s',bvar));
+    else
+        afstr = sprintf('%s%s\n',afstr,sprintf('%s',bvar));
+    end
+    % upper limit
+    if isequal(usrc,'off')
+        afstr = sprintf('%sUpper Limit: %s\n',afstr,uppr);
+    end
+    % increment & decrement
+    if not(isequal(incr,'1')) || not(isequal(decr,'0'))
+        if isequal(isrc,'off') && isequal(dsrc,'off') 
+            afstr = sprintf('%s%s\n',afstr,sprintf('INC=%s|DEC=%s',incr,decr));
+        elseif isequal(psrc,'off')
+            afstr = sprintf('%s%s\n',afstr,sprintf('INC=%s',incr));
+        elseif isequal(dsrc,'off')
+            afstr = sprintf('%s%s\n',afstr,sprintf('DEC=%s',decr));
+        end
+    end
+    %initial condition
+    if isequal(csrc,'off') 
+        if not(isequal(cdtn,'0'))
+            afstr = sprintf('%sIC: %s\n',afstr,cdtn);
+        end
+    end
+    
+    set(opts.blockhandle,'AttributesFormatString',afstr);
 end
 end
