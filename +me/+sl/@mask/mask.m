@@ -1,4 +1,4 @@
-classdef mask    
+classdef mask
     methods (Static)
         % prototypes
         switchinteractive(varargin)

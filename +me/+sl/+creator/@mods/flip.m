@@ -2,7 +2,7 @@ function [bhdl,btyp] = flip(varargin)
 
 % import third parties
 import me.sl.utils.toHandle
-import me.sl.creator.mods.blocktype
+import me.sl.creator.inspect.blocktype
 
 % Gather options from user inputs
 opts = processInputs(varargin{:});

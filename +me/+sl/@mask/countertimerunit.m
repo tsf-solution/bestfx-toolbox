@@ -49,6 +49,8 @@ switch(opts.clbk)
             'blockhandle',opts.blockhandle,'portposition',2);
         flipOutportTerminator('CounterTimerStateSinkPort','st',...
             'blockhandle',opts.blockhandle,'portposition',1);
+        % mask parameter operability
+        setopr();
 end
 
 %% EVALUATION INPUT ARGUMENTS
@@ -104,5 +106,20 @@ function setafs() % nested function
     end
     
     set(opts.blockhandle,'AttributesFormatString',afstr);
+end
+
+%% MASK PARAMETER OPERATBILITY
+function setopr() % nested function
+    import me.sl.creator.mods.setmaskenable
+    import me.types.bool.not
+
+    setmaskenable('UpperLimit','enable',not(usrc));
+    setmaskenable('UpperLimitDataType','enable',not(usrc));
+    setmaskenable('Increment','enable',not(isrc));
+    setmaskenable('IncrementDataType','enable',not(isrc));
+    setmaskenable('Decrement','enable',not(dsrc));
+    setmaskenable('DecrementDataType','enable',not(dsrc));
+    setmaskenable('InitialCondition','enable',not(csrc));
+    setmaskenable('InitialValueDataType','enable',not(csrc));
 end
 end

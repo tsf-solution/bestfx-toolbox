@@ -2,7 +2,7 @@ function [bhdl] = flipOutportTerminator(prop,blockname,varargin)
 
 % import third parties
 import me.sl.creator.mods.flip
-import me.sl.creator.mods.ports
+import me.sl.creator.inspect.ports
 
 % Required input arguments
 narginchk(2,nargin);

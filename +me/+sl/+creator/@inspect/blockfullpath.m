@@ -1,8 +1,8 @@
 function [str] = blockfullpath(bhdl)
 
     % import third parties
-    import me.sl.creator.mods.blockname
-    import me.sl.creator.mods.blockpath
+    import me.sl.creator.inspect.blockname
+    import me.sl.creator.inspect.blockpath
 
     % handle input arguments
     if nargin < 1
