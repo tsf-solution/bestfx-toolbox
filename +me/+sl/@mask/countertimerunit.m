@@ -13,7 +13,7 @@ opts = processInputs(varargin{:});
 %% EXECUTE
 
 % get value of dialog parameters
-bvar = geteval(opts.blockhandle,'VariantType');
+bvar = geteval(opts.blockhandle,'BlockSubtypeVariant');
 uppr = geteval(opts.blockhandle,'UpperLimit');
 incr = geteval(opts.blockhandle,'Increment');
 decr = geteval(opts.blockhandle,'Decrement');
@@ -25,6 +25,8 @@ csrc = geteval(opts.blockhandle,'InitialConditionSourcePort');
 
 switch(opts.clbk)
     case 'init'
+        % validate popup
+        bvar = validatestring(bvar,{'Counter','Timer','Bidirectional Counter','Bidirectional Timer','Free-Running Counter','Free-Running Timer'});
         % validate value
         me.types.numeric.validatePositive(me.types.numeric.toValue(uppr));
         me.types.numeric.validatePositive(me.types.numeric.toValue(incr));
@@ -51,6 +53,8 @@ switch(opts.clbk)
             'blockhandle',opts.blockhandle,'portposition',1);
         % mask parameter operability
         setopr();
+        % block variant type
+        setvar();
 end
 
 %% EVALUATION INPUT ARGUMENTS
@@ -121,5 +125,43 @@ function setopr() % nested function
     setmaskenable('DecrementDataType','enable',not(dsrc));
     setmaskenable('InitialCondition','enable',not(csrc));
     setmaskenable('InitialValueDataType','enable',not(csrc));
+end
+
+%% BLOCK SUBTYPE VARIANT
+function setvar() % nested function
+    import me.sl.creator.inspect.blockhandle
+    import me.sl.creator.inspect.blockfullpath
+    
+    % handle variant subsystem: VariantType
+    vblk = blockfullpath(opts.blockhandle);
+    vhdl = blockhandle([vblk '/' 'VariantType']);
+    
+    if contains(bvar,'Timer')
+        set(vhdl,'OverrideUsingVariant','VariantTypeTimer');
+    elseif contains(bvar,'Counter')
+        set(vhdl,'OverrideUsingVariant','VariantTypeCounter');
+    else
+        error('no valid type selected in block ''%s''',vblk);
+    end
+    
+    % handle variant subsystem: VariantReset
+    rblk = blockfullpath(opts.blockhandle);
+    rhdl = blockhandle([rblk '/' 'VariantReset']);
+    
+    if contains(bvar,'Free-Running')
+        set(rhdl,'OverrideUsingVariant','VariantResetFreeRunning');
+    else
+        set(rhdl,'OverrideUsingVariant','VariantResetPassThrough');
+    end
+    
+    % handle variant subsystem: VariantState
+    sblk = blockfullpath(opts.blockhandle);
+    shdl = blockhandle([sblk '/' 'VariantState']);
+
+    if contains(bvar,'Bidirectional')
+        set(shdl,'OverrideUsingVariant','VariantStateBidirectional');
+    else
+        set(shdl,'OverrideUsingVariant','VariantStateLevel');
+    end
 end
 end

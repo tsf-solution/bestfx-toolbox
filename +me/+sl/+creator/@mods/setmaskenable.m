@@ -20,7 +20,7 @@ set(opts.blockhandle,'MaskEnables',maskenables);
 function options = processInputs(varargin) % nested function
     IP = inputParser;
     IP.addParameter('blockhandle',gcbh,@(x)ishandle(x));
-    IP.addParameter('enable','off',@(x)ischar(x));
+    IP.addParameter('enable','on',@(x)ischar(x));
     IP.parse(varargin{:});
     options = IP.Results;
     % validate strings
