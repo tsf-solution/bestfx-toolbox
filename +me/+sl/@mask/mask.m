@@ -5,6 +5,7 @@ classdef mask
         switchinteractive(varargin)
         flipflop(varargin)
         countertimerunit(varargin)
+        discretefilter(varargin)
     end
     
 end

@@ -44,7 +44,7 @@ switch(opts.clbk)
         flipInportConstant('DecrementSourcePort','decr','Decrement',...
             'blockhandle',opts.blockhandle,'portposition',4,'outdatatypestr','DecrementDataType');
         flipInportConstant('InitialConditionSourcePort','x0','InitialCondition',...
-            'blockhandle',opts.blockhandle,'portposition',5,'outdatatypestr','InitialValueDataType');
+            'blockhandle',opts.blockhandle,'portposition',5,'outdatatypestr','InitialConditionDataType');
         flipInportConstant('ResetSourcePort','rs','false',...
             'blockhandle',opts.blockhandle,'portposition',6);
         flipOutportTerminator('CounterTimerValueSinkPort','n',...
@@ -84,9 +84,9 @@ function setafs() % nested function
     afstr = '';
     % variant
     if not(isequal(decr,'0'))
-        afstr = sprintf('%s%s\n',afstr,sprintf('Charging %s',bvar));
+        afstr = sprintf('%s%s\n',afstr,'Charging %<BlockSubtypeVariant>');
     else
-        afstr = sprintf('%s%s\n',afstr,sprintf('%s',bvar));
+        afstr = sprintf('%s%s\n',afstr,'%<BlockSubtypeVariant>');
     end
     % upper limit
     if isequal(usrc,'off')
@@ -124,7 +124,7 @@ function setopr() % nested function
     setmaskenable('Decrement','enable',not(dsrc));
     setmaskenable('DecrementDataType','enable',not(dsrc));
     setmaskenable('InitialCondition','enable',not(csrc));
-    setmaskenable('InitialValueDataType','enable',not(csrc));
+    setmaskenable('InitialConditionDataType','enable',not(csrc));
 end
 
 %% BLOCK SUBTYPE VARIANT
