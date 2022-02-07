@@ -17,7 +17,6 @@ fltr = geteval(opts.blockhandle,'FilterCoefficient');
 cdtn = geteval(opts.blockhandle,'InitialCondition');
 fsrc = geteval(opts.blockhandle,'FilterCoefficientSourcePort');
 csrc = geteval(opts.blockhandle,'InitialConditionSourcePort');
-% drsrc = geteval(opts.blockhandle,'ResetSourcePort');
 
 switch(opts.clbk)
     case 'init'
@@ -39,6 +38,8 @@ switch(opts.clbk)
         setopr();
         % block variant type
         setvar();
+        % mask display
+        setdisp();
 end
 
 %% EVALUATION INPUT ARGUMENTS
@@ -107,5 +108,14 @@ function setvar() % nested function
     else
         error('no valid type selected in block ''%s''',vblk);
     end
+end
+
+%% MASK DISPLAY
+function setdisp() % nested function
+    mdstr = '';
+    % alias of filter transfer function
+    mdstr = sprintf('%s%s\n',mdstr,sprintf("disp('%s(z)');",regexprep(bvar,{'Low','High','pass'},{'L','H','P'})));
+    
+    set(opts.blockhandle,'MaskDisplay',mdstr);
 end
 end
