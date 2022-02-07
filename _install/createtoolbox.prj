@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="3992647785" file="C:\Users\Timo Fix\Documents\MATLAB\tsf-tool-sllib\_install\createtoolbox.prj" location="C:\Users\Timo Fix\Documents\MATLAB\tsf-tool-sllib\_install" name="createtoolbox" target="target.toolbox" target-name="Package Toolbox">
+  <configuration build-checksum="2137296236" file="C:\Users\Timo Fix\Documents\MATLAB\tsf-tool-sllib\_install\createtoolbox.prj" location="C:\Users\Timo Fix\Documents\MATLAB\tsf-tool-sllib\_install" name="createtoolbox" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>Simulink Library .me</param.appname>
     <param.authnamewatermark>Timo Fix</param.authnamewatermark>
     <param.email>tsf.code@outlook.de</param.email>
@@ -19,7 +19,7 @@
 *install
 *test
 slprj
-@blockicon</param.exclude.filters>
+*@blockicon*</param.exclude.filters>
     <param.exclude.pcodedmfiles>true</param.exclude.pcodedmfiles>
     <param.examples />
     <param.demosxml />
@@ -80,6 +80,7 @@ slprj
     </fileset.rootdir>
     <fileset.rootfiles>
       <file>C:\Users\Timo Fix\Documents\MATLAB\tsf-tool-sllib\+me</file>
+      <file>C:\Users\Timo Fix\Documents\MATLAB\tsf-tool-sllib\Contents.m</file>
       <file>C:\Users\Timo Fix\Documents\MATLAB\tsf-tool-sllib\tsflib.slx</file>
     </fileset.rootfiles>
     <fileset.depfun.included />
