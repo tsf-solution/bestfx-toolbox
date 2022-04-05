@@ -5,6 +5,7 @@ classdef mods
         [bhdl] = flipOutportTerminator(prop,blockname,varargin)
         [bhdl] = flipInportConstant(prop,blockname,value,varargin)
         [] = setmaskenable(prop,varargin)
+        [pos] = resize(varargin)
     end
 end
 
