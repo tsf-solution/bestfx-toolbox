@@ -2,7 +2,7 @@ function [bhdl] = flipOutportTerminator(prop,blockname,varargin)
 
 % import third parties
 import me.sl.creator.mods.flip
-import me.sl.creator.inspect.ports
+import me.sl.creator.inspect.porthandle
 
 % Required input arguments
 narginchk(2,nargin);
@@ -24,7 +24,7 @@ end
 if isequal(btyp, 'Outport')
     set(bhdl, 'ForegroundColor','blue');
     if isnumeric(opts.portposition)
-        n = numel(ports('blockhandle',opts.blockhandle,'type','Outport'));
+        n = numel(porthandle('blockhandle',opts.blockhandle,'type','Outport'));
         opts.portposition = min(n,opts.portposition);
         set(bhdl, 'Port',num2str(opts.portposition));
     end

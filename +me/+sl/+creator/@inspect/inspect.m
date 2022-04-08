@@ -1,7 +1,7 @@
 classdef inspect    
     methods (Static)
         % prototypes
-        [phdls] = ports(varargin)
+        [phdls] = porthandle(varargin)
         [bhdl] = blockhandle(str)
         [str] = blockname(bhdl)
         [str] = blockpath(bhdl)
