@@ -1,4 +1,4 @@
-function autoname(bhdl,re)
+function [] = autoname(bhdl,re)
     if nargin < 2
         re = sprintf('^%s',get(bhdl,'BlockType'));
     end

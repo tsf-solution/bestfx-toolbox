@@ -1,3 +1,3 @@
-function [n] = portnumber(varargin)
-    n = numel(me.sl.creator.inspect.porthandle(varargin{:}));
+function [qty] = portnumber(varargin)
+    qty = numel(me.sl.creator.inspect.porthandle(varargin{:}));
 end

@@ -3,7 +3,7 @@ classdef utils
         
         [bhdls] = findblocks(blocktype, varargin)
         [bhdls] = findports(varargin)
-        autoname(bhdl,re)
+        [] = autoname(bhdl,re)
         [tf] = filteriop(bhdl)
         [tf] = filtersampletime(bhdl)
         [tf] = isLibrary(bdhdl)

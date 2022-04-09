@@ -15,7 +15,7 @@ h = pos(4)-y;
 % get new width
 if ~isempty(opts.width)
     if ischar(opts.width)
-        [w,~] = me.sl.creator.settings.size('widthType',opts.width,'qtyInOutMax',1);
+        [w,~] = me.sl.creator.settings.size('widthType',opts.width);
     elseif isfinite(opts.width)
         w = opts.width;
     end
@@ -24,7 +24,9 @@ end
 % get new height
 if ~isempty(opts.height) 
     if ischar(opts.height)
-        [~,h] = me.sl.creator.settings.size('heightType',opts.height,'qtyInOutMax',1);
+        qtyInMax = me.sl.creator.inspect.portnumber('blockhandle',opts.blockhandle,'type','inport');
+        qtyOutMax = me.sl.creator.inspect.portnumber('blockhandle',opts.blockhandle,'type','outport');
+        [~,h] = me.sl.creator.settings.size('heightType',opts.height,'qtyInOutMax',max(qtyInMax,qtyOutMax));
     elseif isfinite(opts.height)
         h = opts.height;
     end
