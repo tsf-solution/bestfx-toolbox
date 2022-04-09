@@ -2,6 +2,7 @@ classdef utils
     methods (Static)
         
         [bhdls] = findblocks(blocktype, varargin)
+        [bhdls] = findports(varargin)
         autoname(bhdl,re)
         [tf] = filteriop(bhdl)
         [tf] = filtersampletime(bhdl)

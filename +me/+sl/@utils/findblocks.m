@@ -1,4 +1,4 @@
-function bhdls = findblocks(attr, varargin)
+function [bhdls] = findblocks(attr, varargin)
 
 %% PREPROCESSING
 

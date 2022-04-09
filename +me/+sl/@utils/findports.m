@@ -1,30 +1,26 @@
-function [phdls] = porthandle(varargin)
+function [bhdls] = findports(varargin)
 
 %% PREPROCESSING
 
 % Cross-functional variables
-vtyps = {'Inport','Outport','Ifaction'};
+vtyps = {'Inport','Outport'};
 
 % Gather options from user inputs
 opts = processInputs(varargin{:});
 
-%% EXECUTE
-PH = get(opts.blockhandle,'PortHandles');
 
-if sum(strcmpi(opts.type,'Ifaction'))
-    phdls = arrayfun(@(c)c,PH.Ifaction(:));
-elseif sum(strcmpi(opts.type,'Outport'))
-    phdls = arrayfun(@(c)c,PH.Outport(:));
-else
-    phdls = arrayfun(@(c)c,PH.Inport(:));
-end
+%% EXECUTE
+bhdls = find_system(...
+    opts.blockhandle,...
+    'SearchDepth',1,...
+    'BlockType',opts.type);
 
 % select subset by index
 if ~isempty(opts.index)
-    if ~all(opts.index <= numel(phdls))
+    if ~all(opts.index <= numel(bhdls))
         error('The value %s of ''index'' is invalid. Expected index to be in range [1..%d].',mat2str(opts.index),numel(phdls));
     end
-    phdls = phdls(opts.index);
+    bhdls = bhdls(opts.index);
 end
 
 %% EVALUATION INPUT ARGUMENTS
