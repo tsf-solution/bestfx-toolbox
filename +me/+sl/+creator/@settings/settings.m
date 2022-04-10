@@ -1,7 +1,8 @@
 classdef settings
     methods (Static)
         % prototypes
-        [bhdl,btyp] = size(varargin)
+        [width,height] = size(varargin)
+        [x,y] = origin(varargin)
     end
 end
 

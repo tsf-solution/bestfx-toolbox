@@ -6,6 +6,7 @@ classdef mods
         [bhdl] = flipInportConstant(prop,blockname,value,varargin)
         [] = setmaskenable(prop,varargin)
         [pos] = resize(varargin)
+        [bhdls] = insert(varargin)
     end
 end
 
