@@ -29,7 +29,7 @@ function options = processInputs(varargin) % nested function
     options = IP.Results;
     
     options.regexp = validatestring(options.regexp,{'on','off'});
-    options.attr = validatestring(options.attr,{'Type','BlockType','ReferenceBlock','MaskType'}); 
+    options.attr = validatestring(options.attr,{'Type','BlockType','ReferenceBlock','MaskType','Name'}); 
     if isempty(options.systemhandle)
         if options.depth
             options.systemhandle = get_param(gcs,'Handle');
