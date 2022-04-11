@@ -6,8 +6,7 @@ classdef mask
         flipflop(varargin)
         countertimerunit(varargin)
         discretefilter(varargin)
-        c2d(varargin)
+        ContinuousDiscrete(varargin)
     end
     
 end
-

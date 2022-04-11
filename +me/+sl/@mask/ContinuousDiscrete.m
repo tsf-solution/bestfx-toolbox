@@ -1,4 +1,4 @@
-function c2d(varargin)
+function ContinuousDiscrete(varargin)
 
 %% PREPROCESSING
 
