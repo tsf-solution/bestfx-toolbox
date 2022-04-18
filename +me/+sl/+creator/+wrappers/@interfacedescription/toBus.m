@@ -6,22 +6,33 @@ function [] = toBus(varargin)
 import me.sl.creator.parser.xlsx
 
 % Gather options from user inputs
-opts = processInputs(varargin{:});
+[opts, varargin] = processInputs(varargin{:});
+
 
 %% EXECUTE
-T = xlsx.readInterfaceDescription();
+T = xlsx.readInterfaceDescription(varargin{:});
 
-% get names of software components
+% assign buses to a workspace foreach software component
 cellfun(@(c)foreachSwCpnt(c),unique(T.SwCpnt),'UniformOutput',false);
 
 
 %% EVALUATION INPUT ARGUMENTS
-function options = processInputs(varargin) % nested function
+function [options,unmatched] = processInputs(varargin) % nested function
     IP = inputParser;
     IP.KeepUnmatched = false;
-    IP.addParameter('workspace',get(me.sl.utils.toHandle(bdroot),'ModelWorkspace'),@(x)validateModelWorkspace(x));
+    IP.addParameter('workspace',[],@(x)validateModelWorkspace(x));
     IP.parse(varargin{:});
     options = IP.Results;
+    unmatched = me.utils.namedargs2cell(IP.Unmatched);
+    
+    if isempty(options.workspace)
+        if ~isempty(bdroot)
+            options.workspace = get(me.sl.utils.toHandle(bdroot),'ModelWorkspace');
+        else
+            options.workspace = 'base';
+            warning('No model loaded, use char workspace ''base'' instead.');
+        end
+    end
 end
 
 function tf = validateModelWorkspace(x)
@@ -33,6 +44,7 @@ function tf = validateModelWorkspace(x)
     tf = true;
 end
 
+%% categorize table data
 function foreachSwCpnt(swcpnt) % nested function
     S = T(strcmp(T.SwCpnt,swcpnt),:);
     getbusin(S,me.string.camelcase(lower(swcpnt)));
@@ -40,7 +52,7 @@ function foreachSwCpnt(swcpnt) % nested function
 end
 
 function [] = getbusin(T,swcpnt) % nested function
-    T = T(T.isIn == true,:);    
+    T = T(T.isIn == true,:);
     C = {getbushw(T), [swcpnt,'InHw'];...
          getbussw(T), [swcpnt,'InSw'];...
          getbusnw(T), [swcpnt,'InNw']};
@@ -57,6 +69,7 @@ function [] = getbusout(T,swcpnt) % nested function
     createBusOfBuses(C,[swcpnt,'Out']);
 end
 
+%%  assign buses to a workspace
 function [e,b] = createBusOfBuses(C,busalias) % nested function
     % remove previous buses
     estr = ['clear ',busalias,'*_t'];
@@ -90,6 +103,7 @@ function [e,b] = createBusOfSignals(T,busalias) % nested function
 end
 end
 
+%% auxilary functions
 function B = getbushw(T)
     B = T(T.isHw == true,:);
 end

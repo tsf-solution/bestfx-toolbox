@@ -1,6 +1,6 @@
 function [T] = readInterfaceDescription(varargin)
 
-% import third parties
+%% PREPROCESSING
     
 % Parse XLS File    
 listNames = {
@@ -32,6 +32,8 @@ listExclude = {
 % Gather options from user inputs
 opts = processInputs(varargin{:});    
 
+%% EXECUTE
+
 % override import options
 args = detectImportOptions(opts.file);
 args.VariableNamesRange = 1;
@@ -42,14 +44,14 @@ T = readtable(opts.file,args);
 % remove rows which are not complete
 T = rmmissing(T);
 
-%% update table information
+% update table information
 T = movevars(T,'SwCpnt','Before',1);
 % add SignalName
 T.SignalName = cellfun(@(c)determineSignalName(c),T.Signaldef,'UniformOutput',false);
-T = movevars(T,'SignalName','After','SwCpnt');
-T = movevars(T,'DataType','After','SignalName');
+T = movevars(T,{'Group','SignalName'},'After','SwCpnt');
 % transform DataType
 T.DataType = cellfun(@(c)determineDataType(c),T.DataType,'UniformOutput',false);
+T = movevars(T,{'DataType','Length','Gain','Offset','Min','Max','Size'},'After','SignalName');
 % Convert Type
 T.isHw = cellfun(@(c)contains(c,{'HW'}),T.Type,'UniformOutput',true);
 T.isNw = cellfun(@(c)contains(c,{'NW'}),T.Type,'UniformOutput',true);
@@ -57,16 +59,7 @@ T.isSw = cellfun(@(c)contains(c,{'SW'}),T.Type,'UniformOutput',true);
 T.isIn = cellfun(@(c)contains(c,{'IN'}),T.Type,'UniformOutput',true);
 T.isOut = cellfun(@(c)contains(c,{'OUT'}),T.Type,'UniformOutput',true);
 
-T = movevars(T,'Length','After','DataType');
-T = movevars(T,'Gain','After','Length');
-T = movevars(T,'Offset','After','Gain');
-T = movevars(T,'Min','After','Offset');
-T = movevars(T,'Max','After','Min');
-T = movevars(T,'Size','After','Max');
-
-T = movevars(T,'Group','Before','SignalName');
-
-% remove original columns from table
+% remove columns from table
 T.Signaldef = [];
 T.Type = [];
 
