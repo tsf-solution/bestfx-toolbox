@@ -17,13 +17,21 @@ classdef cfg
         end
     end
     
+    methods (Static, Access = private)
+        function [str] = getFilePath()
+            [str,~,~] = fileparts(mfilename('fullpath'));
+        end
+    end
+    
     methods (Static)
         function [str] = getLibraryPath()
-            [str,~,~] = fileparts(mfilename('fullpath'));
+            cwd = pwd;
+            str = cd(fullfile(me.sl.cfg.getFilePath(),'..','..'));
+            cd(cwd);
         end
         
         function [str] = getBlockIconPath()
-            str = fullfile(me.sl.cfg.getLibraryPath(),'@blockicon');
+            str = fullfile(me.sl.cfg.getFilePath(),'@blockicon');
         end
     end
 end
