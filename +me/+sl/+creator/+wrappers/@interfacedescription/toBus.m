@@ -19,20 +19,11 @@ cellfun(@(c)foreachSwCpnt(c),unique(T.SwCpnt),'UniformOutput',false);
 %% EVALUATION INPUT ARGUMENTS
 function [options,unmatched] = processInputs(varargin) % nested function
     IP = inputParser;
-    IP.KeepUnmatched = false;
-    IP.addParameter('workspace',[],@(x)validateModelWorkspace(x));
+    IP.KeepUnmatched = true;
+    IP.addParameter('workspace','base',@(x)validateModelWorkspace(x));
     IP.parse(varargin{:});
     options = IP.Results;
     unmatched = me.utils.namedargs2cell(IP.Unmatched);
-    
-    if isempty(options.workspace)
-        if ~isempty(bdroot)
-            options.workspace = get(me.sl.utils.toHandle(bdroot),'ModelWorkspace');
-        else
-            options.workspace = 'base';
-            warning('No model loaded, use char workspace ''base'' instead.');
-        end
-    end
 end
 
 function tf = validateModelWorkspace(x)
@@ -80,7 +71,7 @@ function [e,b] = createBusOfBuses(C,busalias) % nested function
     E = cellfun(@(s,t)createBusOfSignals(s,t),C(:,1),C(:,2),'UniformOutput',false);
     b = Simulink.Bus;
     b.Description = busname;
-    b.Elements = E{~isempty(E)};
+    b.Elements = [E{~cellfun('isempty',E)}];
     assignin(opts.workspace,bustype,b);
     e = busFromAlias(busalias);
 end
