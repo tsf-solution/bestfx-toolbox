@@ -20,11 +20,13 @@ function sl_customization(cm)
             'separator',...    
             @actionWidthNormal,...
             @actionWidthTiny,...
+            @actionWidthSlim,...
             @actionWidthSmall,...
             @actionWidthLarge,...
             @actionWidthHuge,...
             'separator',...
             @actionSizeMini,...
+            @actionSizeOperator,...
           };
     end
     
@@ -69,6 +71,14 @@ function sl_customization(cm)
         schema.state = 'ENABLED';
     end
 
+    function schema = actionWidthSlim(callbackInfo)
+        schema = sl_action_schema;
+        schema.label = 'Width Slim';
+        schema.callback = @clbkSizeWidth;
+        schema.userdata = 'slim';
+        schema.state = 'ENABLED';
+    end
+
     function schema = actionWidthSmall(callbackInfo)
         schema = sl_action_schema;
         schema.label = 'Width Small';
@@ -101,19 +111,27 @@ function sl_customization(cm)
         schema.state = 'ENABLED';
     end
 
+    function schema = actionSizeOperator(callbackInfo)
+        schema = sl_action_schema;
+        schema.label = 'Size Operator';
+        schema.callback = @clbkSize;
+        schema.userdata = 'operator';
+        schema.state = 'ENABLED';
+    end
+
     %% function callbacks: resize
     function clbkSizeWidth(callbackInfo)
-        bhdls = find_system(me.sl.utils.toHandle(bdroot),'Selected','on');
+        bhdls = setdiff(find_system(me.sl.utils.toHandle(gcs),'SearchDepth',1,'Selected','on'),find_system(me.sl.utils.toHandle(gcs),'SearchDepth',0,'Selected','on'));
         arrayfun(@(c)me.sl.creator.mods.resize('blockhandle',c,'width',callbackInfo.userdata),bhdls,'UniformOutput',false);
     end
 
     function clbkSizeHeight(callbackInfo)
-        bhdls = find_system(me.sl.utils.toHandle(bdroot),'Selected','on');
+        bhdls = setdiff(find_system(me.sl.utils.toHandle(gcs),'SearchDepth',1,'Selected','on'),find_system(me.sl.utils.toHandle(gcs),'SearchDepth',0,'Selected','on'));
         arrayfun(@(c)me.sl.creator.mods.resize('blockhandle',c,'height',callbackInfo.userdata),bhdls,'UniformOutput',false);
     end
 
     function clbkSize(callbackInfo)
-        bhdls = find_system(me.sl.utils.toHandle(bdroot),'Selected','on');
+        bhdls = setdiff(find_system(me.sl.utils.toHandle(gcs),'SearchDepth',1,'Selected','on'),find_system(me.sl.utils.toHandle(gcs),'SearchDepth',0,'Selected','on'));
         arrayfun(@(c)me.sl.creator.mods.resize('blockhandle',c,'width',callbackInfo.userdata,'height',callbackInfo.userdata),bhdls,'UniformOutput',false);
     end
 

@@ -4,6 +4,7 @@ function [width,height] = size(varargin)
 validwidthtypes = {...
     'normal'
     'tiny'
+    'slim'
     'mini'
     'port'
     'operator'
@@ -85,6 +86,8 @@ function w = getStandardizedWidth(type)
     switch(type)
         case 'tiny'
             w = 5; % bus selector, bus creator, mux, demux, ...
+        case 'slim'
+            w = 42;
         case 'small'
             w = 70; % unit conversion, discrete filter, ...
         case 'normal'
