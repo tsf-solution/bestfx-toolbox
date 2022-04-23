@@ -26,7 +26,7 @@ function options = processInputs(varargin) % nested function
     IP = inputParser;
     IP.KeepUnmatched = false;
     IP.addParameter('reset',false,@(x)me.types.bool.validate(x));
-    IP.addParameter('depth',0,@(x)me.types.integer.validateNonNegative(x));
+    IP.addParameter('depth',Inf,@(x)me.types.numeric.validateNonNegative(x));
     IP.parse(varargin{:});
     options = IP.Results;
 end

@@ -121,17 +121,17 @@ function sl_customization(cm)
 
     %% function callbacks: resize
     function clbkSizeWidth(callbackInfo)
-        bhdls = setdiff(find_system(me.sl.utils.toHandle(gcs),'SearchDepth',1,'Selected','on'),find_system(me.sl.utils.toHandle(gcs),'SearchDepth',0,'Selected','on'));
+        bhdls = setdiff(find_system(me.sl.utils.toHandle(gcs),'SearchDepth',1,'LookUnderMasks','on','Selected','on'),find_system(me.sl.utils.toHandle(gcs),'SearchDepth',0,'Selected','on'));
         arrayfun(@(c)me.sl.creator.mods.resize('blockhandle',c,'width',callbackInfo.userdata),bhdls,'UniformOutput',false);
     end
 
     function clbkSizeHeight(callbackInfo)
-        bhdls = setdiff(find_system(me.sl.utils.toHandle(gcs),'SearchDepth',1,'Selected','on'),find_system(me.sl.utils.toHandle(gcs),'SearchDepth',0,'Selected','on'));
+        bhdls = setdiff(find_system(me.sl.utils.toHandle(gcs),'SearchDepth',1,'LookUnderMasks','on','Selected','on'),find_system(me.sl.utils.toHandle(gcs),'SearchDepth',0,'Selected','on'));
         arrayfun(@(c)me.sl.creator.mods.resize('blockhandle',c,'height',callbackInfo.userdata),bhdls,'UniformOutput',false);
     end
 
     function clbkSize(callbackInfo)
-        bhdls = setdiff(find_system(me.sl.utils.toHandle(gcs),'SearchDepth',1,'Selected','on'),find_system(me.sl.utils.toHandle(gcs),'SearchDepth',0,'Selected','on'));
+        bhdls = setdiff(find_system(me.sl.utils.toHandle(gcs),'SearchDepth',1,'LookUnderMasks','on','Selected','on'),find_system(me.sl.utils.toHandle(gcs),'SearchDepth',0,'Selected','on'));
         arrayfun(@(c)me.sl.creator.mods.resize('blockhandle',c,'width',callbackInfo.userdata,'height',callbackInfo.userdata),bhdls,'UniformOutput',false);
     end
 

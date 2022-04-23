@@ -9,12 +9,12 @@ classdef style
         function reset
             import me.sl.style
             style.model();
-            style.block('depth',0,'reset',true);
+            style.block('depth',1,'reset',true);
         end
         
         function apply
             import me.sl.style
-            depth = 0;
+            depth = Inf;
             style.model();
             style.block('depth',depth);
             style.inport(depth);
