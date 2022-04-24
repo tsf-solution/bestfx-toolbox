@@ -9,6 +9,7 @@ classdef mask
         ContinuousDiscrete(varargin)
         pulseselector(varargin)
         pulsedivider(varargin)
+        debounceunit(varargin)
     end
     
 end
