@@ -10,6 +10,7 @@ classdef mask
         pulseselector(varargin)
         pulsedivider(varargin)
         debounceunit(varargin)
+        datapack(varargin)
     end
     
 end
