@@ -12,7 +12,11 @@ opts = processInputs(varargin{:});
 
 % check property which control flip
 try
-    propval = get(opts.blockhandle,prop);
+    if me.types.bool.isEnable(prop)
+        propval = prop;
+    else
+        propval = get(opts.blockhandle,prop);
+    end
 catch ME
     throw(ME);
 end

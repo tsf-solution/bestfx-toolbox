@@ -11,6 +11,7 @@ classdef mask
         pulsedivider(varargin)
         debounceunit(varargin)
         datapack(varargin)
+        validate(varargin)
     end
     
 end
