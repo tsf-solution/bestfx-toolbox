@@ -1,5 +1,8 @@
 function [bhdls] = findblocks(attr, varargin)
 
+% import third parties
+import me.env.matlabversioncheck
+
 %% PREPROCESSING
 
 % Default values for required input arguments
@@ -11,7 +14,13 @@ opts = processInputs(varargin{:});
 %% EXECUTE
 
 % global search
-bhdls = find_system(opts.systemhandle, 'LookUnderMasks', 'all', 'SearchDepth', opts.depth, 'RegExp', opts.regexp, opts.attr, attr);
+if matlabversioncheck('R2020b','comperator','>') % support version before R2020b
+    bhdls = find_system(opts.systemhandle, 'LookUnderMasks', 'all', 'SearchDepth', opts.depth, 'RegExp', opts.regexp, opts.attr, attr);
+else
+    bhdls = find_system(opts.systemhandle, 'LookUnderMasks', 'all', 'MatchFilter', @Simulink.match.allVariants, 'SearchDepth', opts.depth, 'RegExp', opts.regexp, opts.attr, attr);
+end
+
+
 
 %% EVALUATION INPUT ARGUMENTS
 function options = processInputs(varargin) % nested function

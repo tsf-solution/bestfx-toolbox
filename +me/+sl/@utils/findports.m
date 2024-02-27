@@ -1,5 +1,8 @@
 function [bhdls] = findports(varargin)
 
+% import third parties
+import me.sl.utils.findblocks
+
 %% PREPROCESSING
 
 % Cross-functional variables
@@ -10,11 +13,9 @@ opts = processInputs(varargin{:});
 
 
 %% EXECUTE
-bhdls = find_system(...
-    opts.blockhandle,...
-    'SearchDepth',1,...
-    'LookUnderMasks','all',...
-    'BlockType',opts.type);
+
+% find blocks
+bhdls = findblocks(opts.type,'depth',1);
 
 % select subset by index
 if ~isempty(opts.index)
