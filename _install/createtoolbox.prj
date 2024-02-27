@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="3038945406" file="C:\Users\tfix\Code\tsf-tool-sllib\_install\createtoolbox.prj" location="C:\Users\tfix\Code\tsf-tool-sllib\_install" name="createtoolbox" target="target.toolbox" target-name="Package Toolbox">
+  <configuration build-checksum="4283156810" file="C:\Users\tfix\Code\tsf-tool-sllib\_install\createtoolbox.prj" location="C:\Users\tfix\Code\tsf-tool-sllib\_install" name="createtoolbox" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>Simulink Library .me</param.appname>
     <param.authnamewatermark />
     <param.email />
@@ -7,7 +7,7 @@
     <param.summary>Simulik block and script collection (tsf-tool-sllib)</param.summary>
     <param.description />
     <param.screenshot>${PROJECT_ROOT}\me.jpg</param.screenshot>
-    <param.version>1.1</param.version>
+    <param.version>1.1.1</param.version>
     <param.output>${PROJECT_ROOT}\Simulink Library .me.mltbx</param.output>
     <param.products.name />
     <param.products.id />
@@ -20,7 +20,8 @@
 *test
 slprj
 *@blockicon*
-*.xlsx</param.exclude.filters>
+*.xlsx
+renameFolders.m</param.exclude.filters>
     <param.exclude.pcodedmfiles>true</param.exclude.pcodedmfiles>
     <param.examples />
     <param.demosxml />
@@ -81,7 +82,6 @@ slprj
     <fileset.rootfiles>
       <file>C:\Users\tfix\Code\tsf-tool-sllib\+me</file>
       <file>C:\Users\tfix\Code\tsf-tool-sllib\Contents.m</file>
-      <file>C:\Users\tfix\Code\tsf-tool-sllib\renameFolders.m</file>
       <file>C:\Users\tfix\Code\tsf-tool-sllib\sl_customization.m</file>
       <file>C:\Users\tfix\Code\tsf-tool-sllib\slblocks.m</file>
       <file>C:\Users\tfix\Code\tsf-tool-sllib\startup.m</file>
