@@ -19,6 +19,10 @@ classdef style
             style.block('depth',depth);
             style.inport(depth);
             style.outport(depth);
+            style.buscreator(depth);
+            style.busselector(depth);
+            style.mux(depth);
+            style.demux(depth);
             style.logic(depth);
             style.math(depth);
             style.terminator(depth);
@@ -35,22 +39,27 @@ classdef style
     end
 
     methods(Access=private, Static)
+        
         % prototypes
         model()
         block(varargin)
+        buscreator(varargin)
+        busselector(varargin)
+        constant(depth)
+        delay(depth)
+        demux(depth)
+        enable(depth)
         inport(depth)
-        outport(depth)
         logic(depth)
         math(depth)
-        terminator(depth)
-        constant(depth)
-        saturate(depth)
-        relay(depth)
+        mux(depth)
+        outport(depth)
         ratelimiter(depth)
-        switches(depth)
-        delay(depth)
-        typecast(depth)
         ratetransition(depth)
-        enable(depth)
+        relay(depth)
+        saturate(depth)
+        switches(depth)
+        terminator(depth)
+        typecast(depth)
     end
 end
