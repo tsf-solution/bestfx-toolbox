@@ -24,8 +24,10 @@ end
 % get new height
 if ~isempty(opts.height) 
     if ischar(opts.height)
-        qtyInMax = me.sl.creator.inspect.portnumber('blockhandle',opts.blockhandle,'type','inport');
-        qtyOutMax = me.sl.creator.inspect.portnumber('blockhandle',opts.blockhandle,'type','outport');
+        phdl = me.sl.creator.inspect.porthandle(opts.blockhandle,'type','inport');
+        qtyInMax = me.sl.creator.inspect.portnumber(phdl);
+        phdl = me.sl.creator.inspect.porthandle(opts.blockhandle,'type','outport');
+        qtyOutMax = me.sl.creator.inspect.portnumber(phdl);
         [~,h] = me.sl.creator.settings.size('heightType',opts.height,'qtyInOutMax',max(qtyInMax,qtyOutMax));
     elseif isfinite(opts.height)
         h = opts.height;

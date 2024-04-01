@@ -31,7 +31,7 @@ function options = processInputs(varargin) % nested function
     IP.KeepUnmatched = true;
     IP.addParameter('blockhandle',gcbh,@(x)ishandle(x));
     IP.addParameter('type',vtyps{1},@(x)ischar(x));
-    IP.addParameter('index',[],@(x)me.types.integer.validateIndex(x));
+    IP.addParameter('index',[],@(x)me.types.integer.validateIndexing(x));
     IP.parse(varargin{:});
     options = IP.Results;
     

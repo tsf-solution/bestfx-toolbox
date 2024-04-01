@@ -14,6 +14,10 @@ function sl_customization(cm)
         schema = sl_container_schema;
         schema.label = 'Settings me.';
         schema.childrenFcns = {...
+            @actionAlign,...    
+            @actionAlignInport,...
+            @actionAlignOutport,...
+            'separator',...    
             @actionHeightStandard,...
             @actionHeightCompact,...
             @actionHeightExtra,...
@@ -30,7 +34,31 @@ function sl_customization(cm)
           };
     end
     
-    %% actions: resize
+    %% actions: arange
+        function schema = actionAlign(callbackInfo)
+        schema = sl_action_schema;
+        schema.label = 'Align In-/Outports';
+        schema.callback = @clbkAlign;
+        schema.userdata = 'all';
+        schema.state = 'ENABLED';
+    end
+    
+    function schema = actionAlignInport(callbackInfo)
+        schema = sl_action_schema;
+        schema.label = 'Align Inports';
+        schema.callback = @clbkAlign;
+        schema.userdata = 'inport';
+        schema.state = 'ENABLED';
+    end
+
+    function schema = actionAlignOutport(callbackInfo)
+        schema = sl_action_schema;
+        schema.label = 'Align Outports';
+        schema.callback = @clbkAlign;
+        schema.userdata = 'outport';
+        schema.state = 'ENABLED';
+    end
+    
     function schema = actionHeightStandard(callbackInfo)
         schema = sl_action_schema;
         schema.label = 'Height Standard';
@@ -119,7 +147,7 @@ function sl_customization(cm)
         schema.state = 'ENABLED';
     end
 
-    %% function callbacks: resize
+    %% function callbacks: arange
     function clbkSizeWidth(callbackInfo)
         bhdls = setdiff(find_system(me.sl.utils.toHandle(gcs),'SearchDepth',1,'LookUnderMasks','on','Selected','on'),find_system(me.sl.utils.toHandle(gcs),'SearchDepth',0,'Selected','on'));
         arrayfun(@(c)me.sl.creator.mods.resize('blockhandle',c,'width',callbackInfo.userdata),bhdls,'UniformOutput',false);
@@ -133,6 +161,11 @@ function sl_customization(cm)
     function clbkSize(callbackInfo)
         bhdls = setdiff(find_system(me.sl.utils.toHandle(gcs),'SearchDepth',1,'LookUnderMasks','on','Selected','on'),find_system(me.sl.utils.toHandle(gcs),'SearchDepth',0,'Selected','on'));
         arrayfun(@(c)me.sl.creator.mods.resize('blockhandle',c,'width',callbackInfo.userdata,'height',callbackInfo.userdata),bhdls,'UniformOutput',false);
+    end
+
+    function clbkAlign(callbackInfo)
+        bhdls = setdiff(find_system(me.sl.utils.toHandle(gcs),'SearchDepth',1,'LookUnderMasks','on','Selected','on'),find_system(me.sl.utils.toHandle(gcs),'SearchDepth',0,'Selected','on'));
+        arrayfun(@(c)me.sl.creator.mods.align('blockhandle',c,'method',callbackInfo.userdata),bhdls,'UniformOutput',false);
     end
 
 end

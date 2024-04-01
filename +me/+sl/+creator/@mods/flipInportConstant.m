@@ -3,6 +3,7 @@ function [bhdl] = flipInportConstant(prop,blockname,value,varargin)
 % import third parties
 import me.sl.creator.mods.flip
 import me.sl.creator.inspect.porthandle
+import me.sl.creator.inspect.portnumber
 
 % Required input arguments
 narginchk(2,nargin);
@@ -33,7 +34,8 @@ if isequal(btyp, 'Constant')
 elseif isequal(btyp, 'Inport')
     set(bhdl, 'ForegroundColor','green');
     if isnumeric(opts.portposition)
-        n = numel(porthandle('blockhandle',opts.blockhandle,'type','Inport'));
+        phdls = porthandle(opts.blockhandle,'type','Inport');
+        n = portnumber(phdls);
         opts.portposition = min(n,opts.portposition);
         set(bhdl, 'Port',num2str(opts.portposition));
     end

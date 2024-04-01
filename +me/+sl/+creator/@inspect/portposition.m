@@ -1,8 +1,8 @@
-function [qty] = portnumber(phdl)
+function [pos] = portposition(phdl)
     % handle input arguments
     if nargin < 1
         phdl =  me.sl.creator.inspect.porthandle();
-    end    
-
-    qty = numel(phdl);
+    end
+    
+    pos = get(phdl,'Position');
 end

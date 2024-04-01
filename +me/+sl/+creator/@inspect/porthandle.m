@@ -1,4 +1,9 @@
-function [phdls] = porthandle(varargin)
+function [phdl] = porthandle(bhdl, varargin)
+
+% handle input arguments
+if nargin < 1
+    bhdl = gcbh;
+end
 
 %% PREPROCESSING
 
@@ -9,31 +14,30 @@ vtyps = {'Inport','Outport','Ifaction'};
 opts = processInputs(varargin{:});
 
 %% EXECUTE
-PH = get(opts.blockhandle,'PortHandles');
+PH = get(bhdl,'PortHandles');
 
 if sum(strcmpi(opts.type,'Ifaction'))
-    phdls = arrayfun(@(c)c,PH.Ifaction(:));
+    phdl = arrayfun(@(c)c,PH.Ifaction(:));
 elseif sum(strcmpi(opts.type,'Outport'))
-    phdls = arrayfun(@(c)c,PH.Outport(:));
+    phdl = arrayfun(@(c)c,PH.Outport(:));
 else
-    phdls = arrayfun(@(c)c,PH.Inport(:));
+    phdl = arrayfun(@(c)c,PH.Inport(:));
 end
 
 % select subset by index
 if ~isempty(opts.index)
-    if ~all(opts.index <= numel(phdls))
-        error('The value %s of ''index'' is invalid. Expected index to be in range [1..%d].',mat2str(opts.index),numel(phdls));
+    if ~all(opts.index <= numel(phdl))
+        error('The value %s of ''index'' is invalid. Expected index to be in range [1..%d].',mat2str(opts.index),numel(phdl));
     end
-    phdls = phdls(opts.index);
+    phdl = phdl(opts.index);
 end
 
 %% EVALUATION INPUT ARGUMENTS
 function options = processInputs(varargin) % nested function
     IP = inputParser;
     IP.KeepUnmatched = true;
-    IP.addParameter('blockhandle',gcbh,@(x)ishandle(x));
     IP.addParameter('type',vtyps{1},@(x)ischar(x));
-    IP.addParameter('index',[],@(x)me.types.integer.validateIndex(x));
+    IP.addParameter('index',[],@(x)me.types.integer.validateIndexing(x));
     IP.parse(varargin{:});
     options = IP.Results;
     
