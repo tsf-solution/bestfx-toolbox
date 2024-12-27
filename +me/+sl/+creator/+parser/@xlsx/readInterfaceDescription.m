@@ -58,6 +58,7 @@ T.isNw = cellfun(@(c)contains(c,{'NW'}),T.Type,'UniformOutput',true);
 T.isSw = cellfun(@(c)contains(c,{'SW'}),T.Type,'UniformOutput',true);
 T.isIn = cellfun(@(c)contains(c,{'IN'}),T.Type,'UniformOutput',true);
 T.isOut = cellfun(@(c)contains(c,{'OUT'}),T.Type,'UniformOutput',true);
+T.isNvm = cellfun(@(c)contains(c,{'NVM'}),T.Group,'UniformOutput',true);
 
 % remove columns from table
 T.Signaldef = [];

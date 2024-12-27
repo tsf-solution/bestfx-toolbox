@@ -40,6 +40,7 @@ function foreachSwCpnt(swcpnt) % nested function
     S = T(strcmp(T.SwCpnt,swcpnt),:);
     getbusin(S,me.string.camelcase(lower(swcpnt)));
     getbusout(S,me.string.camelcase(lower(swcpnt)));
+    getbusnvm(S,me.string.camelcase(lower(swcpnt)))
 end
 
 function [] = getbusin(T,swcpnt) % nested function
@@ -58,6 +59,15 @@ function [] = getbusout(T,swcpnt) % nested function
          getbusnw(T), [swcpnt,'OutNw']};
     
     createBusOfBuses(C,[swcpnt,'Out']);
+end
+
+function [] = getbusnvm(T,swcpnt) % nested function
+    T = T(T.isNvm == true,:);
+    % reduce duplicate entries to the first one
+    [~,ID,~] = unique(T.SignalName,'first');
+    T = T(ID,:);
+    
+    createBusOfSignals(T,[swcpnt,'Nvm']);
 end
 
 %%  assign buses to a workspace
