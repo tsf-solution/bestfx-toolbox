@@ -1,4 +1,7 @@
-*.asv
-/_install
-/_test
+# folders
+_test
 slprj
+
+# files
+*.asv
+*.mltbx

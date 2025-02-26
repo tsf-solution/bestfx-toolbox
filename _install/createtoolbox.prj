@@ -1,17 +1,26 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
   <configuration build-checksum="3074059541" file="C:\Users\tfix\Code\tsf-tool-sllib\_install\createtoolbox.prj" location="C:\Users\tfix\Code\tsf-tool-sllib\_install" name="createtoolbox" target="target.toolbox" target-name="Package Toolbox">
-    <param.appname>Simulink Library .me</param.appname>
-    <param.authnamewatermark />
-    <param.email />
+    <param.appname>.me BestFX</param.appname>
+    <param.authnamewatermark>Timo Fix</param.authnamewatermark>
+    <param.email>tsf.code@outlook.de</param.email>
     <param.company />
-    <param.summary>Simulik block and script collection (tsf-tool-sllib)</param.summary>
-    <param.description />
+    <param.summary>The ultimate collection of Simulink Blocks and MATLAB Scripts</param.summary>
+    <param.description>.me BestFX is a comprehensive toolbox that contains carefully curated best practice guidelines for MATLAB and Simulink. This collection combines powerful Simulink blocks and efficient MATLAB scripts to assist you in developing and optimizing your models.</param.description>
     <param.screenshot>${PROJECT_ROOT}\me.jpg</param.screenshot>
-    <param.version>1.1.1</param.version>
-    <param.output>${PROJECT_ROOT}\Simulink Library .me.mltbx</param.output>
-    <param.products.name />
-    <param.products.id />
-    <param.products.version />
+    <param.version>1.0.0</param.version>
+    <param.output>${PROJECT_ROOT}\.me BestFX.mltbx</param.output>
+    <param.products.name>
+      <item>MATLAB</item>
+      <item>Simulink</item>
+    </param.products.name>
+    <param.products.id>
+      <item>1</item>
+      <item>2</item>
+    </param.products.id>
+    <param.products.version>
+      <item>9.5</item>
+      <item>9.2</item>
+    </param.products.version>
     <param.platforms />
     <param.guid>7b0a8658-addd-4cb7-a338-2ef71fc6cf12</param.guid>
     <param.exclude.filters>.git
@@ -49,11 +58,7 @@ renameFolders.m</param.exclude.filters>
       <param.authnamewatermark />
       <param.email />
       <param.company />
-      <param.description />
       <param.output />
-      <param.products.name />
-      <param.products.id />
-      <param.products.version />
       <param.platforms />
       <param.exclude.pcodedmfiles />
       <param.examples />
@@ -82,26 +87,16 @@ renameFolders.m</param.exclude.filters>
     <fileset.rootfiles>
       <file>C:\Users\tfix\Code\tsf-tool-sllib\+me</file>
       <file>C:\Users\tfix\Code\tsf-tool-sllib\Contents.m</file>
+      <file>C:\Users\tfix\Code\tsf-tool-sllib\libbestfx.slx</file>
       <file>C:\Users\tfix\Code\tsf-tool-sllib\sl_customization.m</file>
       <file>C:\Users\tfix\Code\tsf-tool-sllib\slblocks.m</file>
       <file>C:\Users\tfix\Code\tsf-tool-sllib\startup.m</file>
-      <file>C:\Users\tfix\Code\tsf-tool-sllib\tsflib.slx</file>
     </fileset.rootfiles>
     <fileset.depfun.included />
-    <fileset.depfun.excluded>
-      <file>C:\Users\tfix\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\MATLAB Library .me\+me\+types\@bool\bool.m</file>
-      <file>C:\Users\tfix\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\MATLAB Library .me\+me\+types\@integer\integer.m</file>
-      <file>C:\Users\tfix\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\MATLAB Library .me\+me\+types\@numeric\numeric.m</file>
-      <file>C:\Users\tfix\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\MATLAB Library .me\+me\@string\camelcase.m</file>
-      <file>C:\Users\tfix\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\MATLAB Library .me\+me\@string\compactfloat.m</file>
-      <file>C:\Users\tfix\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\MATLAB Library .me\+me\@string\isversion.m</file>
-      <file>C:\Users\tfix\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\MATLAB Library .me\+me\@string\replacemarks.m</file>
-      <file>C:\Users\tfix\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\MATLAB Library .me\+me\@string\string.m</file>
-      <file>C:\Users\tfix\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\MATLAB Library .me\+me\@string\textline.m</file>
-    </fileset.depfun.excluded>
+    <fileset.depfun.excluded />
     <fileset.package />
     <build-deliverables>
-      <file location="C:\Users\tfix\Code\tsf-tool-sllib\_install" name="Simulink Library .me.mltbx" optional="false">C:\Users\tfix\Code\tsf-tool-sllib\_install\Simulink Library .me.mltbx</file>
+      <file location="C:\Users\tfix\Code\tsf-tool-sllib\_install" name=".me BestFX.mltbx" optional="false">C:\Users\tfix\Code\tsf-tool-sllib\_install\.me BestFX.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>

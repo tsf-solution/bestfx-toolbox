@@ -1,7 +1,8 @@
 function startup
-    this = 'Simulink Library .me';
+    this = '.me BestFX';
     warning OFF BACKTRACE;
-    tf = validatetoolbox('MATLAB Library .me');    
+    tf = true;
+    % tf = tf & validatetoolbox('<toolbox-name>');
     if ~tf
         warning("Toolbox '%s' has invalid dependencies. Resolve warnings above before use!",this);
     end
@@ -11,10 +12,6 @@ end
 function tf = validatetoolbox(name,version)
     % input argument check
     narginchk(1,2);
-    % input argument handling
-    if nargin < 2
-        version = '1.0';
-    end
     
     % check toolbox availability
     TBXS = ver;

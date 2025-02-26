@@ -1,8 +1,8 @@
 classdef cfg
     
     properties (Constant)
-        meSimulinkLibraryLabel = 'Simulink Library .me';
-        meSimulinkLibraryName = 'tsflib';
+        meSimulinkLibraryLabel = '.me BestFX';
+        meSimulinkLibraryName = 'libbestfx';
     end
     
     properties
@@ -28,10 +28,6 @@ classdef cfg
             cwd = pwd;
             str = cd(fullfile(me.sl.cfg.getFilePath(),'..','..'));
             cd(cwd);
-        end
-        
-        function [str] = getBlockIconPath()
-            str = fullfile(me.sl.cfg.getFilePath(),'@blockicon');
         end
     end
 end
