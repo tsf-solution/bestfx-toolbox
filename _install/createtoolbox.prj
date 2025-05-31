@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="3074059541" file="C:\Users\tfix\Code\tsf-tool-sllib\_install\createtoolbox.prj" location="C:\Users\tfix\Code\tsf-tool-sllib\_install" name="createtoolbox" target="target.toolbox" target-name="Package Toolbox">
+  <configuration build-checksum="1250092067" file="C:\Users\tfix\Code\tsf-tool-sllib\_install\createtoolbox.prj" location="C:\Users\tfix\Code\tsf-tool-sllib\_install" name="createtoolbox" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>.me BestFX</param.appname>
     <param.authnamewatermark>Timo Fix</param.authnamewatermark>
     <param.email>tsf.code@outlook.de</param.email>
@@ -7,7 +7,7 @@
     <param.summary>The ultimate collection of Simulink Blocks and MATLAB Scripts</param.summary>
     <param.description>.me BestFX is a comprehensive toolbox that contains carefully curated best practice guidelines for MATLAB and Simulink. This collection combines powerful Simulink blocks and efficient MATLAB scripts to assist you in developing and optimizing your models.</param.description>
     <param.screenshot>${PROJECT_ROOT}\me.jpg</param.screenshot>
-    <param.version>1.0.0</param.version>
+    <param.version>2.0.0</param.version>
     <param.output>${PROJECT_ROOT}\.me BestFX.mltbx</param.output>
     <param.products.name>
       <item>MATLAB</item>
@@ -30,7 +30,8 @@
 slprj
 *@blockicon*
 *.xlsx
-renameFolders.m</param.exclude.filters>
+renameFolders.m
+transform.m</param.exclude.filters>
     <param.exclude.pcodedmfiles>true</param.exclude.pcodedmfiles>
     <param.examples />
     <param.demosxml />
