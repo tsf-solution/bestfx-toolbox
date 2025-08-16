@@ -1,6 +1,6 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="1250092067" file="C:\Users\tfix\Code\tsf-tool-sllib\_install\createtoolbox.prj" location="C:\Users\tfix\Code\tsf-tool-sllib\_install" name="createtoolbox" target="target.toolbox" target-name="Package Toolbox">
-    <param.appname>.me BestFX</param.appname>
+  <configuration build-checksum="2201217305" file="C:\Users\tfix\Code\tsf-tool-sllib\_install\createtoolbox.prj" location="C:\Users\tfix\Code\tsf-tool-sllib\_install" name="createtoolbox" target="target.toolbox" target-name="Package Toolbox">
+    <param.appname>Simulink Library .me BestFX</param.appname>
     <param.authnamewatermark>Timo Fix</param.authnamewatermark>
     <param.email>tsf.code@outlook.de</param.email>
     <param.company />
@@ -8,7 +8,7 @@
     <param.description>.me BestFX is a comprehensive toolbox that contains carefully curated best practice guidelines for MATLAB and Simulink. This collection combines powerful Simulink blocks and efficient MATLAB scripts to assist you in developing and optimizing your models.</param.description>
     <param.screenshot>${PROJECT_ROOT}\me.jpg</param.screenshot>
     <param.version>2.0.0</param.version>
-    <param.output>${PROJECT_ROOT}\.me BestFX.mltbx</param.output>
+    <param.output>${PROJECT_ROOT}\Simulink Library .me BestFX.mltbx</param.output>
     <param.products.name>
       <item>MATLAB</item>
       <item>Simulink</item>
@@ -97,7 +97,7 @@ transform.m</param.exclude.filters>
     <fileset.depfun.excluded />
     <fileset.package />
     <build-deliverables>
-      <file location="C:\Users\tfix\Code\tsf-tool-sllib\_install" name=".me BestFX.mltbx" optional="false">C:\Users\tfix\Code\tsf-tool-sllib\_install\.me BestFX.mltbx</file>
+      <file location="C:\Users\tfix\Code\tsf-tool-sllib\_install" name="Simulink Library .me BestFX.mltbx" optional="false">C:\Users\tfix\Code\tsf-tool-sllib\_install\Simulink Library .me BestFX.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>
